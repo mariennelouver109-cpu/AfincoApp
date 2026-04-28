@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${materia}"></title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<header>
+    <h1 th:text="${materia}"></h1>
+</header>
+
+<main>
+    <!-- Loop através dos períodos (bimestres) -->
+    <div th:each="period : ${periods}" class="mb-20">
+        <h2 th:text="${period.nome}"></h2>
+
+        <!-- Verifica se há conteúdos neste período -->
+        <div th:if="${#lists.isEmpty(period.conteudos)}" class="message message--warning">
+            <p><em>Nenhum conteúdo disponível nesta etapa.</em></p>
+        </div>
+
+        <!-- Lista de conteúdos do etapa -->
+        <ul class="list--reset" th:if="${not #lists.isEmpty(period.conteudos)}">
+            <li th:each="conteudo : ${period.conteudos}">
+                <div class="content-item">
+                    <!-- Exibe o nome do conteúdo e tipo -->
+                    <h3 th:text="${conteudo.nome}"></h3>
+                    <!-- Exibe o tipo do conteúdo -->
+                    <p><strong>Tipo:</strong> <span th:text="${conteudo.tipo}"></span></p>
+
+                    <!-- Botão para abrir conteúdo se houver arquivo -->
+                    <div th:if="${conteudo.openUrl != null and conteudo.openUrl != ''}">
+                        <a th:href="${conteudo.openUrl}"
+                           class="btn btn-primary"
+                           target="_blank">
+                            📖 Abrir Conteúdo
+                        </a>
+                    </div>
+
+                    <!-- Mensagem se não houver arquivo -->
+                    <div th:if="${conteudo.openUrl == null or conteudo.openUrl == ''}" class="text-muted text-italic">
+                        <p>Arquivo não disponível</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Lista de exames do período -->
+        <div th:if="${not #lists.isEmpty(period.exames)}">
+            <h3>Questionários</h3>
+            <ul class="list--reset">
+                <li th:each="exame : ${period.exames}" class="mb-10">
+                    <a th:href="${exame.questionarioUrl}"
+                       class="btn btn-secondary">
+                        📝 <span th:text="${exame.nome}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Botão para voltar -->
+    <nav class="mt-20">
+        <a th:href="@{/menu}" class="btn btn-secondary">← Voltar ao Menu</a>
+    </nav>
+</main>
+</body>
+</html>

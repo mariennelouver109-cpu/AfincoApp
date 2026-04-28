@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<header>
+    <h1>Menu</h1>
+</header>
+
+<main>
+    <p>Bem-vindo(a), <strong th:text="${username}"></strong></p>
+
+    <h2>Matérias Disponíveis</h2>
+    
+    <div th:if="${#lists.isEmpty(subjects)}" class="message message--warning">
+        <p>Nenhuma matéria disponível no momento.</p>
+    </div>
+
+    <ul class="list--reset" th:if="${not #lists.isEmpty(subjects)}">
+        <li th:each="subject : ${subjects}" class="mb-10">
+            <a th:href="@{/materia/{slug}(slug=${subject.slug})}" 
+               class="btn btn-primary"
+               th:text="${subject.subjectName}"></a>
+        </li>
+    </ul>
+
+    <nav class="mt-20">
+        <a th:href="@{/boletim}" class="btn btn-secondary">Ver Boletim</a>
+        <a th:href="@{/perfil}" class="btn btn-primary ml-10">Meu Perfil</a>
+        <a th:href="@{/logout}" class="btn btn-danger ml-10">Sair</a>
+    </nav>
+</main>
+</body>
+</html>

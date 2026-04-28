@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultado do Questionário</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<header>
+    <h1 th:text="${examName}">Resultado</h1>
+</header>
+<main>
+    <div class="message message--success">
+        <p>Você acertou <strong th:text="${score}"></strong> de <strong th:text="${total}"></strong> questões.</p>
+        <p>Desempenho: <strong th:text="${percent}"></strong>%</p>
+    </div>
+    <nav class="mt-20">
+        <a th:href="@{/menu}" class="btn btn-secondary">Voltar ao Menu</a>
+    </nav>
+</main>
+</body>
+</html>

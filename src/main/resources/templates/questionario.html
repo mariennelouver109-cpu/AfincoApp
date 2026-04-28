@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Questionário</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<header>
+    <h1>Questionário</h1>
+</header>
+
+<main>
+    <p>Questão <strong th:text="${numero}"></strong> de <strong th:text="${total}"></strong></p>
+
+    <h2 th:text="${questao.enunciado}"></h2>
+
+    <form th:action="@{/questionario/proxima}" method="post" class="mt-20">
+        <div class="radio-group">
+            <div th:each="alt, iStat : ${questao.alternativas}">
+                <label>
+                    <input type="radio" name="resposta" th:value="${iStat.index}" required>
+                    <span th:text="${alt}"></span>
+                </label>
+            </div>
+        </div>
+
+        <input type="hidden" name="examId" th:value="${examId}">
+        <input type="hidden" name="indiceAtual" th:value="${numero}">
+        <input type="hidden" name="pontuacao" th:value="${pontuacao}">
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">Próxima</button>
+            <a th:href="@{/menu}" class="btn btn-secondary">Desistir</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

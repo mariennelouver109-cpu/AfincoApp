@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Perfil</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<header>
+    <h1>Perfil do Usuário</h1>
+</header>
+
+<main>
+    <div th:if="${mensagem}" class="message message--success">
+        <span th:text="${mensagem}"></span>
+    </div>
+
+    <div th:if="${erro}" class="message message--error">
+        <span th:text="${erro}"></span>
+    </div>
+
+    <h2>Atualizar Nome de Usuário</h2>
+    <form th:action="@{/update}" method="post">
+        <div class="form-group">
+            <label for="username">Novo Nome de Usuário:</label>
+            <input type="text" id="username" name="username" th:value="${username}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+
+    <h2>Alterar Senha</h2>
+    <form th:action="@{/change-password}" method="post">
+        <div class="form-group">
+            <label for="currentPassword">Senha Atual:</label>
+            <input type="password" id="currentPassword" name="currentPassword" required>
+        </div>
+
+        <div class="form-group">
+            <label for="newPassword">Nova Senha:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirmar Nova Senha:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Alterar Senha</button>
+    </form>
+
+    <h2>Excluir Conta</h2>
+    <p class="text-muted">Atenção: Esta ação não pode ser desfeita.</p>
+    <form th:action="@{/delete}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir sua conta?')">
+        <button type="submit" class="btn btn-danger">Excluir Conta</button>
+    </form>
+
+    <nav class="mt-20">
+        <a th:href="@{/menu}" class="btn btn-secondary">← Voltar ao Menu</a>
+    </nav>
+</main>
+</body>
+</html>

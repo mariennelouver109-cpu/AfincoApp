@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .error-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .error-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .error-box h1 {
+            color: #e74c3c;
+            font-size: 48px;
+            margin: 0 0 20px 0;
+        }
+        
+        .error-box p {
+            color: #555;
+            font-size: 16px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .error-box .error-message {
+            background: #ffe6e6;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .error-box a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .error-box a:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-box">
+            <h1>⚠️ Erro</h1>
+            <p>Desculpe, ocorreu um erro ao processar sua solicitação.</p>
+            
+            <div class="error-message" th:if="${error}">
+                <strong>Detalhes:</strong><br/>
+                <span th:text="${error}"></span>
+            </div>
+            
+            <p>Por favor, tente novamente ou entre em contato com o suporte se o problema persistir.</p>
+            
+            <a href="/">Voltar ao Início</a>
+        </div>
+    </div>
+</body>
+</html>
